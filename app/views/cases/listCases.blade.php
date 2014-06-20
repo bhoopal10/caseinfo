@@ -65,8 +65,8 @@
             <td><?php echo $i; $i++; ?></td>
             <td><?php echo $case->title ?></td>
             <td><?php echo $case->judgename ?></td>
-            <td><?php echo $case->jdate ?></td>
-            <td class="enactment"><?php echo $case->enactment; ?></td>
+            <td><?php echo date('d/m/Y',strtotime($case->jdate)); ?></td>
+            <td class="enactment" ><?php echo substr($case->enactment,0,50).'....'; ?></td>
             <td><?php echo $case->reference; ?></td>
             <td><?php echo $case->reference1; ?></td>
             <td style="cursor:pointer" onclick="window.open('<?php echo URL::to('cases/popup',$case->SNo).'?e='.Input::old('enactment').'&s='.Input::old('subject'); ?>','name','status=1,width=800,height=500,scrollbars=1')"><i class="ace-icon fa fa-hand-o-right"></i>View</td>

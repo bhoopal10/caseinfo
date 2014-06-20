@@ -65,6 +65,7 @@ class AccountController extends BaseController
 
            if($id)
            {
+                
                /*the following code for email confirmation to activate account*/
                Mail::send('emails.auth.activate',array('link'=>URL::to('account/activate',$code),'displayName'=>$first_name,'username'=>$username),function($message) use ($email,$first_name) {
                   $message->to($email,$first_name)->subject('Activation Code');
@@ -233,18 +234,9 @@ class AccountController extends BaseController
                 if($user->save())
                 {
                      Mail::send('emails.auth.ForgetPassword',array('link'=>URL::to('account/recover',$code),'displayName'=>$displayName,'username'=>$user_name,'password'=>$password),function($message) use($email,$user_name) {
-                       $message->to('bhoopal10@gmail.com',$user_name)->subject('Your new password');
+                       $message->to($email,$user_name)->subject('Your new password');
                     });
-                    // $to=$email; 
-                    // $subject="Forget Password";
-                    // $param=array('link'=>URL::to('account/recover',$code),'displayName'=>$displayName,'username'=>$user_name,'password'=>$password);
-                    // $data=View::make('emails/auth.ForgetPassword')->with('auth',$param);
-                    // $message=$data;
-                    // $headers  = 'MIME-Version: 1.0' . "\r\n";
-                    // $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                    // $headers.='From: admin@mindjinn.com';
-                   // mail($to,$subject,$message,$headers);
-
+                   
                     return Redirect::to('/')
                         ->with('success','Your new password sent to your mail ');
                 }

@@ -342,5 +342,10 @@ class CasesController extends BaseController
             return false;
         }
     }
+    public function getTest()
+    {
+        $data=User::findorFail(54);
+        print_r($data->logs->log_history);
+    }
 
 } 
